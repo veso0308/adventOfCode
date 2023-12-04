@@ -33,7 +33,7 @@ games = games.map(line => {
 
     });
 
-    console.log(line, bags);
+    // console.log(line, bags);
 
     return {line, id, bags};
 
@@ -52,10 +52,10 @@ const valid_games = [];
 
 outter: for(let i = 0; i < games.length; i++) {
     const game = games[i];
-    console.log('GGGG', game);
+    // console.log('GGGG', game);
 
     const colors = Object.keys(game.bags);
-    console.log('COLORS', colors);
+    // console.log('COLORS', colors);
 
     for(let i = 0; i < colors.length; i++) {
         if (!FILTER_KEYS.includes(colors[i])) {
@@ -70,9 +70,9 @@ outter: for(let i = 0; i < games.length; i++) {
     valid_games.push(game);
 }
 
-console.log(valid_games);
-console.log(valid_games.reduce((bag, a) => bag+a.id, 0));
+// console.log(valid_games);
+console.log('Solution day 1 part 1', valid_games.reduce((bag, a) => bag+a.id, 0));
 
 power = games.reduce((bag, game) => bag + Object.values(game.bags).reduce((power,ball) => power*ball,1), 0);
 
-console.log(power);
+console.log('Solution day 2 part 2', power);
