@@ -131,5 +131,5 @@ for(let y = 0; y < map.length; y++) {
 	}
 }
 
-console.log(gearRatios);
+// console.log(gearRatios);
 console.log('Day 3 part 2', gearRatios.reduce((bag, x) => bag + x[0].number*x[1].number, 0));
