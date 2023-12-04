@@ -9,7 +9,7 @@ games = games.map(line => {
 
    const game = line.split(":").map(e => e.trim());
     // console.log('game', game);
-    const id = game[0].replace('Game ', '');
+    const id = Number(game[0].replace('Game ', ''));
 
     const bags = [];
     game[1].split(";").forEach(group => {
@@ -48,27 +48,31 @@ const FILTER = {
 
 const FILTER_KEYS = Object.keys(FILTER);
 
-console.log(games);
+const valid_games = [];
 
+outter: for(let i = 0; i < games.length; i++) {
+    const game = games[i];
+    console.log('GGGG', game);
 
-const returned = games.filter(g => {
-
-    console.log(JSON.stringify(g)); // TODO: wtf is bags empty here but not in row 51?!
-
-    const colors = Object.keys(g.bags);
+    const colors = Object.keys(game.bags);
+    console.log('COLORS', colors);
 
     for(let i = 0; i < colors.length; i++) {
         if (!FILTER_KEYS.includes(colors[i])) {
-            console.log('not included', JSON.stringify(FILTER_KEYS), colors[i]);
-            return false;
+            // console.log('not included', JSON.stringify(FILTER_KEYS), colors[i]);
+            continue outter;
         }
-        if (g.bags[colors[i]] > FILTER[colors[i]]) {
-            console.log('more', colors, JSON.stringify(g), JSON.stringify(g.bags));
-            return false;
+        if (game.bags[colors[i]] > FILTER[colors[i]]) {
+            // console.log('more', colors, JSON.stringify(game), JSON.stringify(game.bags));
+            continue outter;
         }
     }
-    return true;
+    valid_games.push(game);
+}
 
-});
+console.log(valid_games);
+console.log(valid_games.reduce((bag, a) => bag+a.id, 0));
 
-console.log(returned.length);
+power = games.reduce((bag, game) => bag + Object.values(game.bags).reduce((power,ball) => power*ball,1), 0);
+
+console.log(power);
