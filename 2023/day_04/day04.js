@@ -24,7 +24,7 @@ console.log('Day 4 part 1', partOne);
 for(let g = 0; g < games.length; g++) {
 
 	const copies = games[g].copies;
-	console.log('game', games[g].id, games[g].winners.length, copies);
+	// console.log('game', games[g].id, games[g].winners.length, copies);
 	for(let w = 1; w <= games[g].winners.length; w++) {
 
 		if(!games[g+w].hasOwnProperty('copies')) {
